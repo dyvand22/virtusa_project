@@ -28,15 +28,7 @@ def calculate_fare(km, vehicle, hour):
     return base_fare, final_fare, surge
 
 # MAIN PROGRAM - Get inputs from user
-
-print()
-print("  ================================")
-print("        CityCab FareCalc          ")
-print("  ================================")
 print("  Welcome! Let us calculate")
-print("  your ride fare.")
-print("  ================================")
-
 # ── Ask for distance ──────────────────────
 while True:
     try:
@@ -77,11 +69,7 @@ while True:
 # CALCULATE AND PRINT RECEIPT
 
 base_fare, final_fare, surge = calculate_fare(km, vehicle, hour)
-
-print()
-print("  ================================")
 print("         Your Price Receipt       ")
-print("  ================================")
 print(f"  Vehicle    : {vehicle}")
 print(f"  Distance   : {km} km")
 print(f"  Rate       : Rs.{rates[vehicle]}/km")
