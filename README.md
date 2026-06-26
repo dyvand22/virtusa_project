@@ -292,3 +292,234 @@ The application validates the following user inputs:
 
 Developed as a Python programming project to demonstrate fare calculation logic, input validation, exception handling, and modular application design.
 
+
+# Library Management Database System
+
+## Overview
+
+The Library Management Database System is a relational database project developed using MySQL to manage students, books, and book issuance records. The project demonstrates database design principles, referential integrity, data manipulation, and analytical SQL queries for common library management operations.
+
+The database supports book issuance tracking, overdue book identification, borrowing statistics, inactive student detection, and maintenance operations.
+
+---
+
+## Features
+
+* Maintains student records
+* Stores book information with categories
+* Tracks issued and returned books
+* Enforces referential integrity using foreign keys
+* Prevents invalid return dates using check constraints
+* Identifies overdue books
+* Analyzes the most borrowed book categories
+* Detects inactive students
+* Removes inactive student records from the database
+
+---
+
+## Database Schema
+
+The system consists of three relational tables:
+
+### Student
+
+Stores student information.
+
+| Column | Data Type    | Constraint  |
+| ------ | ------------ | ----------- |
+| roll   | INT          | Primary Key |
+| name   | VARCHAR(180) | NOT NULL    |
+
+---
+
+### Book
+
+Stores book details.
+
+| Column   | Data Type    | Constraint  |
+| -------- | ------------ | ----------- |
+| bid      | INT          | Primary Key |
+| title    | VARCHAR(100) | NOT NULL    |
+| category | VARCHAR(50)  | —           |
+
+---
+
+### IssuedBooks
+
+Maintains book borrowing transactions.
+
+| Column           | Data Type                                     | Constraint            |
+| ---------------- | --------------------------------------------- | --------------------- |
+| issid            | INT                                           | Primary Key           |
+| bid              | INT                                           | Foreign Key → Book    |
+| roll             | INT                                           | Foreign Key → Student |
+| issuedate        | DATE                                          | NOT NULL              |
+| returndate       | DATE                                          | Nullable              |
+| Check Constraint | Return date cannot be earlier than issue date |                       |
+
+---
+
+## Entity Relationship
+
+```text
+Student (1) --------< IssuedBooks >-------- (1) Book
+        roll                              bid
+```
+
+---
+
+## Sample Data
+
+The database includes sample records for:
+
+* 6 Students
+* 5 Books
+* 6 Book Issue Transactions
+
+The sample dataset includes:
+
+* Active borrowings
+* Returned books
+* Overdue books
+* Multiple book categories
+
+---
+
+## SQL Operations
+
+### 1. Database Creation
+
+* Creates the `library_db` database.
+* Creates all required tables.
+* Defines primary keys, foreign keys, and constraints.
+
+---
+
+### 2. Data Insertion
+
+Populates the database with sample records for:
+
+* Students
+* Books
+* Book issue transactions
+
+---
+
+### 3. Overdue Book Report
+
+Displays books that:
+
+* Have not been returned
+* Have been issued for more than 14 days
+
+The query returns:
+
+* Student Name
+* Book Title
+* Category
+* Issue Date
+* Number of Days Kept
+
+---
+
+### 4. Most Borrowed Book Category
+
+Calculates borrowing frequency by category.
+
+The query returns:
+
+* Book Category
+* Total Number of Times Borrowed
+
+---
+
+### 5. Inactive Student Detection
+
+Identifies students who have not borrowed any book within the last six months.
+
+---
+
+### 6. Remove Inactive Students
+
+Deletes inactive student records using a nested subquery while maintaining MySQL compatibility with `SQL_SAFE_UPDATES`.
+
+---
+
+## Technologies Used
+
+* MySQL
+* SQL (DDL)
+* SQL (DML)
+* SQL (DQL)
+* Relational Database Design
+
+---
+
+## Concepts Demonstrated
+
+* Database Creation
+* Table Relationships
+* Primary Keys
+* Foreign Keys
+* Check Constraints
+* Data Insertion
+* JOIN Operations
+* Aggregate Functions
+* GROUP BY
+* ORDER BY
+* Nested Subqueries
+* Date Functions (`CURDATE()`, `DATE_SUB()`, `DATEDIFF()`)
+* DELETE Operations
+* SQL Safe Update Handling
+
+---
+
+## Project Structure
+
+```text
+library_management.sql
+```
+
+---
+
+## How to Run
+
+### Prerequisites
+
+* MySQL Server 8.0 or later
+* MySQL Workbench (optional)
+
+### Steps
+
+1. Create a new MySQL connection.
+2. Open the `library_management.sql` script.
+3. Execute the script.
+4. The script will:
+
+   * Create the database
+   * Create all tables
+   * Insert sample data
+   * Execute analytical queries
+   * Display the final student records
+
+---
+
+## Future Enhancements
+
+* Book reservation system
+* Fine calculation for overdue books
+* Librarian management module
+* Student login and authentication
+* Book availability tracking
+* Transaction history
+* Stored procedures and triggers
+* Index optimization for large datasets
+* Database views for reporting
+* Role-based access control
+
+---
+
+## Author
+
+Developed as an academic SQL project to demonstrate relational database design, data integrity, query optimization, and analytical SQL techniques using MySQL.
+
