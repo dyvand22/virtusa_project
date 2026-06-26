@@ -1,19 +1,28 @@
-CREATE database lib;
-use lib;
+CREATE DATABASE library_db;
+USE library_db;
 
-CREATE TABLE student(
-ROLL int primary key, NAME varchar(180));
-
-create table book(
-bid int primary key, title varchar(100),category varchar(50));
-
-create table IssuedBooks(
-Issid int primary key,
-bid int,
-ROLL int,
-issuedate date,
-returndate date
+CREATE TABLE student (
+    roll int          PRIMARY KEY,
+    name varchar(180) NOT NULL
 );
+
+CREATE TABLE book (
+    bid      int          PRIMARY KEY,
+    title    varchar(100) NOT NULL,
+    category varchar(50)
+);
+
+CREATE TABLE IssuedBooks (
+    issid      int  PRIMARY KEY,
+    bid        int,
+    roll       int,
+    issuedate  date NOT NULL,
+    returndate date,
+    CHECK (returndate IS NULL OR returndate >= issuedate),
+    FOREIGN KEY (bid)  REFERENCES book(bid),
+    FOREIGN KEY (roll) REFERENCES student(roll)
+);
+
 INSERT INTO student VALUES
 (1, 'Anand'),
 (2, 'Riya'),
@@ -37,57 +46,49 @@ INSERT INTO IssuedBooks VALUES
 (5, 5, 5, '2025-03-05', NULL),          -- Rahul has The Alchemist
 (6, 1, 6, '2025-01-01', '2025-01-10'); -- Sneha returned long ago
 
--- QUERY 1: FIND OVERDUE BOOKS
-Select
-  s.NAME,
-  b.title,
-  b.category,
-  i.issuedate,
-  datediff(curdate(),i.issuedate) as DaysKept
+-- QUERY 1: Overdue books (not returned, kept > 14 days)
+SELECT
+    s.name                           AS StudentName,
+    b.title                          AS BookTitle,
+    b.category                       AS Category,
+    i.issuedate                      AS IssuedOn,
+    DATEDIFF(CURDATE(), i.issuedate) AS DaysKept
+FROM issuedbooks i
+    JOIN student s ON i.roll = s.roll
+    JOIN book    b ON i.bid  = b.bid
+WHERE
+    i.returndate IS NULL
+    AND DATEDIFF(CURDATE(), i.issuedate) > 14
+ORDER BY DaysKept DESC;
 
-From IssuedBooks i
-     join student s
-       on i.ROLL = s.ROLL
-	 
-     join book b
-       on i.bid = b.bid
+-- QUERY 2: Most borrowed category
+SELECT
+    b.category  AS Category,
+    COUNT(*)    AS TimesBorrowed
+FROM issuedbooks i
+    JOIN book b ON i.bid = b.bid
+GROUP BY b.category
+ORDER BY TimesBorrowed DESC;
 
-where i.returndate is NULL and datediff(curdate(),i.issuedate) > 14
-order by DaysKept desc;
-
--- QUERY 2: MOST POPULAR CATEGORY
-
-select
-  b.category,
-  count(*) as TimesBorrowed
-
-from IssuedBooks i
-     join book b
-     on i.bid=b.bid
-group by b.category
-order by TimesBorrowed desc;
-
--- QUERY 3: FIND INACTIVE STUDENTS
+-- QUERY 3: Inactive students (no activity in last 6 months)
 SELECT name
-FROM Student
+FROM student
 WHERE roll NOT IN (
     SELECT roll
     FROM IssuedBooks
-    WHERE issueDate >= DATE_SUB(CURDATE(), INTERVAL 3 YEAR)
+    WHERE issuedate >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH)  -- ✅ fixed
 );
 
--- QUERY 4: DELETE INACTIVE STUDENTS
-
+-- QUERY 4: Delete inactive students
 SET SQL_SAFE_UPDATES = 0;
-
 DELETE FROM student
 WHERE roll NOT IN (
     SELECT roll FROM (
         SELECT roll
         FROM IssuedBooks
-        WHERE issueDate >= DATE_SUB(CURDATE(), INTERVAL 3 YEAR)
+        WHERE issuedate >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH)  -- ✅ fixed
     ) AS temp
 );
-
 SET SQL_SAFE_UPDATES = 1;
+
 SELECT * FROM student;
