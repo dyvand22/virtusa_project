@@ -122,3 +122,338 @@ java passwordValid
 ## Author
 
 Developed as a Java programming project to demonstrate secure password validation techniques and object-oriented programming principles.
+
+
+
+
+# CityCab Fare Calculator
+
+## Overview
+
+CityCab Fare Calculator is a Python-based console application that calculates the fare for a cab ride based on the travel distance, selected vehicle category, and time of travel. The application applies predefined per-kilometer rates and automatically includes surge pricing during peak hours.
+
+The project demonstrates fundamental Python programming concepts such as functions, dictionaries, loops, exception handling, conditional statements, and user input validation.
+
+---
+
+## Features
+
+* Calculates fare based on travel distance
+* Supports multiple vehicle categories
+* Applies automatic surge pricing during peak hours
+* Validates all user inputs
+* Generates a detailed fare receipt
+* Handles invalid inputs gracefully using exception handling
+
+---
+
+## Vehicle Categories
+
+| Vehicle Type | Rate (per km) |
+| ------------ | ------------: |
+| Economy      |        ₹10/km |
+| Premium      |        ₹18/km |
+| SUV          |        ₹25/km |
+
+---
+
+## Surge Pricing
+
+A **1.5× surge multiplier** is automatically applied during peak hours.
+
+| Time                            | Surge    |
+| ------------------------------- | -------- |
+| 5:00 PM – 8:00 PM (17:00–20:00) | 1.5×     |
+| All Other Hours                 | No Surge |
+
+---
+
+## Project Structure
+
+```text
+citycab_fare_calculator.py
+```
+
+### Core Components
+
+| Component          | Purpose                                                                                      |
+| ------------------ | -------------------------------------------------------------------------------------------- |
+| `rates`            | Stores vehicle categories and their respective fare rates.                                   |
+| `calculate_fare()` | Calculates the base fare, applies surge pricing when applicable, and returns the final fare. |
+| Input Validation   | Ensures valid distance, vehicle type, and time values are entered by the user.               |
+| Receipt Generator  | Displays a detailed fare breakdown including surge information and total payable amount.     |
+
+---
+
+## Fare Calculation
+
+The fare is calculated using the following formula:
+
+```text
+Base Fare = Distance × Vehicle Rate
+
+Final Fare =
+    Base Fare × 1.5    (During Peak Hours)
+    Base Fare          (Otherwise)
+```
+
+---
+
+## Sample Execution
+
+```text
+Welcome! Let us calculate
+
+Enter distance in km:
+15
+
+Available vehicles:
+- Economy (Rs.10/km)
+- Premium (Rs.18/km)
+- SUV (Rs.25/km)
+
+Enter vehicle type:
+Premium
+
+Enter hour of day (0 to 23):
+18
+
+        Your Price Receipt
+
+Vehicle      : Premium
+Distance     : 15 km
+Rate         : Rs.18/km
+Base Fare    : Rs.270.00
+Surge        : 1.5x (Peak Hours)
+--------------------------------
+Total Fare   : Rs.405.00
+
+Note: Peak hour (5PM to 8PM)
+surcharge has been applied.
+
+Thank you for choosing CityCab!
+Have a safe journey!
+```
+
+---
+
+## How to Run
+
+### Prerequisites
+
+* Python 3.x
+
+### Execute
+
+```bash
+python citycab_fare_calculator.py
+```
+
+---
+
+## Input Validation
+
+The application validates the following user inputs:
+
+* Distance must be greater than **0 km**
+* Vehicle type must be **Economy**, **Premium**, or **SUV**
+* Hour must be between **0 and 23**
+* Invalid numeric inputs are handled using exception handling
+
+---
+
+## Concepts Demonstrated
+
+* Python Functions
+* Dictionaries
+* Conditional Statements
+* Loops
+* Exception Handling (`try` / `except`)
+* Input Validation
+* String Formatting (f-strings)
+* Modular Programming
+
+---
+
+## Future Enhancements
+
+* Support for coupon and discount codes
+* Dynamic pricing based on traffic conditions
+* Multiple trip estimation
+* Graphical User Interface (Tkinter or PyQt)
+* Integration with mapping APIs for automatic distance calculation
+* Trip history and receipt generation
+* GST and additional service charge calculation
+
+---
+
+## Author
+
+Developed as a Python programming project to demonstrate fare calculation logic, input validation, exception handling, and modular application design.
+
+
+# CityCab Fare Calculator
+
+## Overview
+
+CityCab Fare Calculator is a Python-based console application that calculates the fare for a cab ride based on the travel distance, selected vehicle category, and time of travel. The application applies predefined per-kilometer rates and automatically includes surge pricing during peak hours.
+
+The project demonstrates fundamental Python programming concepts such as functions, dictionaries, loops, exception handling, conditional statements, and user input validation.
+
+---
+
+## Features
+
+* Calculates fare based on travel distance
+* Supports multiple vehicle categories
+* Applies automatic surge pricing during peak hours
+* Validates all user inputs
+* Generates a detailed fare receipt
+* Handles invalid inputs gracefully using exception handling
+
+---
+
+## Vehicle Categories
+
+| Vehicle Type | Rate (per km) |
+| ------------ | ------------: |
+| Economy      |        ₹10/km |
+| Premium      |        ₹18/km |
+| SUV          |        ₹25/km |
+
+---
+
+## Surge Pricing
+
+A **1.5× surge multiplier** is automatically applied during peak hours.
+
+| Time                            | Surge    |
+| ------------------------------- | -------- |
+| 5:00 PM – 8:00 PM (17:00–20:00) | 1.5×     |
+| All Other Hours                 | No Surge |
+
+---
+
+## Project Structure
+
+```text
+citycab_fare_calculator.py
+```
+
+### Core Components
+
+| Component          | Purpose                                                                                      |
+| ------------------ | -------------------------------------------------------------------------------------------- |
+| `rates`            | Stores vehicle categories and their respective fare rates.                                   |
+| `calculate_fare()` | Calculates the base fare, applies surge pricing when applicable, and returns the final fare. |
+| Input Validation   | Ensures valid distance, vehicle type, and time values are entered by the user.               |
+| Receipt Generator  | Displays a detailed fare breakdown including surge information and total payable amount.     |
+
+---
+
+## Fare Calculation
+
+The fare is calculated using the following formula:
+
+```text
+Base Fare = Distance × Vehicle Rate
+
+Final Fare =
+    Base Fare × 1.5    (During Peak Hours)
+    Base Fare          (Otherwise)
+```
+
+---
+
+## Sample Execution
+
+```text
+Welcome! Let us calculate
+
+Enter distance in km:
+15
+
+Available vehicles:
+- Economy (Rs.10/km)
+- Premium (Rs.18/km)
+- SUV (Rs.25/km)
+
+Enter vehicle type:
+Premium
+
+Enter hour of day (0 to 23):
+18
+
+        Your Price Receipt
+
+Vehicle      : Premium
+Distance     : 15 km
+Rate         : Rs.18/km
+Base Fare    : Rs.270.00
+Surge        : 1.5x (Peak Hours)
+--------------------------------
+Total Fare   : Rs.405.00
+
+Note: Peak hour (5PM to 8PM)
+surcharge has been applied.
+
+Thank you for choosing CityCab!
+Have a safe journey!
+```
+
+---
+
+## How to Run
+
+### Prerequisites
+
+* Python 3.x
+
+### Execute
+
+```bash
+python citycab_fare_calculator.py
+```
+
+---
+
+## Input Validation
+
+The application validates the following user inputs:
+
+* Distance must be greater than **0 km**
+* Vehicle type must be **Economy**, **Premium**, or **SUV**
+* Hour must be between **0 and 23**
+* Invalid numeric inputs are handled using exception handling
+
+---
+
+## Concepts Demonstrated
+
+* Python Functions
+* Dictionaries
+* Conditional Statements
+* Loops
+* Exception Handling (`try` / `except`)
+* Input Validation
+* String Formatting (f-strings)
+* Modular Programming
+
+---
+
+## Future Enhancements
+
+* Support for coupon and discount codes
+* Dynamic pricing based on traffic conditions
+* Multiple trip estimation
+* Graphical User Interface (Tkinter or PyQt)
+* Integration with mapping APIs for automatic distance calculation
+* Trip history and receipt generation
+* GST and additional service charge calculation
+
+---
+
+## Author
+
+Developed as a Python programming project to demonstrate fare calculation logic, input validation, exception handling, and modular application design.
+
